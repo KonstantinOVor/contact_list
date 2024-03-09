@@ -1,0 +1,15 @@
+spring:
+  jpa:
+    properties:
+      hibernate:
+        dialect: org.hibernate.dialect.PostgreSQLDialect
+    show-sql: true
+    hibernate:
+      ddl-auto: create-drop
+  datasource:
+    url: jdbc:postgresql://localhost:5678/contacts
+    username: root
+    password: root
+    driverClassName: org.postgresql.Driver
+    hikari:
+      schema: contacts_schema
