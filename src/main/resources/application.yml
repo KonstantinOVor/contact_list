@@ -2,14 +2,15 @@ spring:
   jpa:
     properties:
       hibernate:
-        dialect: org.hibernate.dialect.PostgreSQLDialect
+        dialect: org.hibernate.dialect.MySQL8Dialect
     show-sql: true
     hibernate:
       ddl-auto: create-drop
   datasource:
-    url: jdbc:postgresql://localhost:5678/contacts
-    username: root
-    password: root
-    driverClassName: org.postgresql.Driver
+    url: jdbc:mysql://localhost:3305/contacts
+    username: mysql
+    password: mysql
+    driverClassName: com.mysql.cj.jdbc.Driver
     hikari:
       schema: contacts_schema
+
