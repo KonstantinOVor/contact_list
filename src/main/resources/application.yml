@@ -1,16 +1,20 @@
+server:
+  port: 1234
+
 spring:
   jpa:
     properties:
       hibernate:
-        dialect: org.hibernate.dialect.MySQL8Dialect
+        dialect: org.hibernate.dialect.PostgreSQLDialect
+    database: POSTGRESQL
     show-sql: true
     hibernate:
-      ddl-auto: create-drop
+      ddl-auto: update
   datasource:
-    url: jdbc:mysql://localhost:3305/contacts
-    username: mysql
-    password: mysql
-    driverClassName: com.mysql.cj.jdbc.Driver
+    url: jdbc:postgresql://localhost:5432/postgres
+    username: postgres
+    password: postgres
+    driverClassName: org.postgresql.Driver
     hikari:
-      schema: contacts_schema
+      schema: contact_schema
 

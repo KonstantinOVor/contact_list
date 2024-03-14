@@ -9,15 +9,11 @@ import org.springframework.dao.support.DataAccessUtils;
 import org.springframework.jdbc.core.ArgumentPreparedStatementSetter;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.jdbc.core.RowMapperResultSetExtractor;
-import org.springframework.jdbc.support.GeneratedKeyHolder;
-import org.springframework.jdbc.support.KeyHolder;
 import org.springframework.stereotype.Repository;
 
 
 import java.sql.PreparedStatement;
-import java.sql.Statement;
 import java.util.List;
-import java.util.Objects;
 import java.util.Optional;
 @Slf4j
 @Repository
@@ -28,20 +24,19 @@ public class DataBaseContactRepository  implements ContactRepository{
     public Contact save(Contact contact) {
         log.debug("Calling DataBaseContactRepository save method, contact: {}", contact);
 
-        String sql = "INSERT INTO contact (id, first_name, last_name, email, phone) VALUES (nextval('contact_id_seq'), ?, ?, ?, ?)";
-        KeyHolder keyHolder = new GeneratedKeyHolder();
-        jdbcTemplate.update(connection -> {
-            PreparedStatement ps = connection.prepareStatement(sql, Statement.RETURN_GENERATED_KEYS);
+        String sql = "INSERT INTO contact (first_name, last_name, email, phone) VALUES ( ?, ?, ?, ?)";
+
+        int rowsAffected = jdbcTemplate.update(connection -> {
+            PreparedStatement ps = connection.prepareStatement(sql);
             ps.setString(1, contact.getFirstName());
             ps.setString(2, contact.getLastName());
             ps.setString(3, contact.getEmail());
             ps.setString(4, contact.getPhone());
             return ps;
-        }, keyHolder);
-
-        contact.setId(Objects.requireNonNull(keyHolder.getKey()).longValue());
+        });
         return contact;
     }
+
 
     @Override
     public void deleteById(Long id) {

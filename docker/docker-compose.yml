@@ -2,7 +2,7 @@ version: "2"
 
 services:
     mysql:
-        image: mysql:8.0.32
+        image: mysql:latest
         ports:
             - "3305:3305"
         environment:
@@ -11,3 +11,4 @@ services:
             - MYSQL_DB=contacts
         volumes:
             - ./init.sql:/docker-entrypoint-initdb.d/init.sql
+        hostname: mysql

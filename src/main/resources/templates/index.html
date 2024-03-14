@@ -24,12 +24,18 @@
                 <td th:text="${contact.email}"></td>
                 <td th:text="${contact.phone}"></td>
                 <td>
-                    <a th:href="@{/contacts/edit/{id}(id=${contact.id})}">Edit</a>
-                    <a th:href="@{/contacts/delete/{id}(id=${contact.id})}">Delete</a>
+                    <form th:action="@{/contacts/edit/{id}(id=${contact.id})}" method="get" style="display: inline;">
+                        <button type="submit">Edit</button>
+                    </form>
+                    <form th:action="@{/contacts/delete/{id}(id=${contact.id})}" method="get" style="display: inline;">
+                        <button type="submit">Delete</button>
+                    </form>
                 </td>
             </tr>
         </tbody>
     </table>
-<a href="/contacts/add">Add Contact</a>
+    <form action="/contacts/add" method="get">
+        <button type="submit">Add Contact</button>
+    </form>
 </body>
 </html>
